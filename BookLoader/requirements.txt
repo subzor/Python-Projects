@@ -1,0 +1,14 @@
+configparser
+pathlib
+requests
+woocommerce
+fuzzywuzzy
+python-Levenshtein-wheels
+rapidfuzz
+PyQt5
+beautifulsoup4
+google
+lxml
+requests-cache
+pillow
+mysql-connector-python
