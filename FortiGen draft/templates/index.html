@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" href="static/css/style.css"/>
+  <title>Forti Generator</title>
+</head>
+<body>
+  <h1>
+  </h1>
+  <div class="main-frame">
+    <div class="source-frame" >
+      <p class="source-label" >Source: </p>
+      <p id="file-name" >plik.csv </p>
+      <label class="main-source">
+      <input type="file"/>
+        Upload file
+      </label>
+    </div>
+    <div class="run-fr">
+      <p class="tips" id="first">Run first program</p>
+      <p class="tips" id="second">Run second program </p>
+    </div>
+    <div class="run-frame">
+      <button class="btn" id="run1"> Run 1</button>
+      <button class="btn" id="run2"> Run 2</button>
+    </div>
+    <textarea readonly id="logs"></textarea>
+    <button class="btn" id="download">Pobierz</button>
+  </div>
+  
+</body>
+</html>

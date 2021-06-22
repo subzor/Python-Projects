@@ -1,0 +1,124 @@
+
+.main-frame {
+  background-color: rgba(33, 37, 43, 180);
+  border-radius: 8px;
+  width: 800px;
+  min-height: 600px;
+  background-image: none;
+  height: auto;
+  margin: auto;
+  margin-top: 80px;
+  padding: 20px;
+  color: white;
+}
+
+.source-frame {
+  background-color: inherit;
+  color: white;
+  margin: auto;
+  padding: 10px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.run-fr{
+  height: 100px;
+}
+
+.source-label{
+  font: 15pt "Segoe UI";
+  margin: 10px 600px 0 100px;
+}
+
+#file-name{
+  font: 15pt "Segoe UI";
+  margin: -27px 500px 0 200px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.main-source {
+  border: 0;
+  border-radius: 15px;
+  padding: 10px 30px;
+  cursor: pointer;
+  margin: auto;
+  font: 15pt "Segoe UI";
+  background-color: #343b48 !important;
+  float: right;
+  border-style: none;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  background-image: none;
+  font-weight: 700;
+  margin: -30px 50px 0 auto;
+}
+
+.main-source:hover{
+  background-color: #bd93f9 !important;
+}
+
+.btn {
+  font: 15pt "Segoe UI";
+  background-repeat: no-repeat;	
+  border: 0;
+  border-radius: 15px;
+  background-color: #343b48 !important;
+  text-align: center;
+  color: aliceblue;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 10px 30px;
+}
+.btn:hover{
+  background-color: #bd93f9 !important;
+}
+
+.btn:pressed {
+  background-color: rgb(189, 147, 249);	
+  color: rgb(255, 255, 255);
+}
+
+.run-frame {
+  position: relative;
+}
+.tips {
+  font: 10pt "Segoe UI";
+  display: inline-block;
+}
+
+#run1 {
+  float: left;
+  margin-left: 50px;
+}
+
+#run2 {
+  display: inline-block;
+  margin-left: 100px;
+}
+
+#first {
+  display: inline-block;
+  margin-left: 55px;
+  margin-top: 10%;
+}
+
+#second {
+  display: inline-block;
+  margin-left: 105px;
+}
+
+#logs {
+  margin-top: 20px;
+  width: 100%;
+  min-height: 200px;
+}
+
+#download {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
