@@ -145,16 +145,17 @@ class Baselinker():
             self.driver.find_element_by_id("button_sell_start").click()
             self.wait.until(EC.text_to_be_present_in_element((By.ID, "progress_bar_percent"), '100%'))
 
-            p = Select(self.driver.find_element_by_xpath
+            # p = Select(self.driver.find_element_by_xpath)
         except Exception as error:  # pylint: disable=broad-except
             print(error)
+            return
 
 
 base = Baselinker(e_mail="",
                 password="",
-                max_count='20')
+                max_count='50')
 
-list_of_category = ['Accesories', 'Art', 'Audio CD', 'Biography', 'Business', 'Childrens', 'Classics', 'Contemporary', 'Crime', 'Fantasy', 'Fiction', 'Food & Drink', 'Graphic Novel', 'Health & Fitness', 'History', 'Horror', 'Humour & Comedy', 'LGBT', 'Music', 'Mystery', 'Nonfiction', 'Philosophy', 'Poetry', 'Polish Interest', 'Psychology', 'Religion', 'Romance', 'Science', 'Science-Fiction', 'Self Help', 'Sport', 'Thriller', 'Travel', 'Young Adult']
+list_of_category = ['Biography', 'Business', 'Childrens', 'Classics', 'Contemporary', 'Crime', 'Dictionary', 'Education', 'Fantasy', 'Feminism', 'Fiction', 'Food & Drink', 'Graphic Novel', 'Health & Fitness', 'History', 'Hobby', 'Horror', 'Humour & Comedy', 'Law & Economy', 'LGBT', 'Magazines' , 'Music', 'Mystery', 'Nonfiction', 'Philosophy', 'Poetry', 'Polish Interest', 'Psychology', 'Religion', 'Romance', 'Science', 'Science-Fiction', 'Self Help', 'Sociology', 'Sport', 'Thriller', 'Travel', 'Young Adult']
 
 base.log_in()
 base.allegro()
