@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <title>Zadanie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+
+    
+p {
+  margin: 0;
+}
+
+#div-1{
+  color: #9295cd; 
+  text-align: center; 
+  font-family: 'Open Sans'; 
+  font-style: normal; 
+  font-weight: 400; 
+  width: 600px; 
+  height: 600px; 
+  display: flex; 
+  margin-left: auto; 
+  margin-right: auto; 
+  margin-top: 50px;
+  position: relative;
+  background-image: url(https://images.unsplash.com/photo-1464802686167-b939a6910659?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1033&q=80);
+}
+
+#div-2 {
+  background-color: #03060f; 
+  opacity: 0.6; 
+  background-size:cover;
+  width: 85%;
+  height: 85%;
+  margin: auto;
+  display: block;
+}
+
+
+input {
+  background: 
+      linear-gradient(#9295cd,#9295cd) left bottom 5px /calc(95% - 10px) 2px no-repeat;
+  border: none;
+  padding: 10px;
+  padding-left: 10px;
+  
+}
+
+button{
+  background: #9295cd;
+  border: none;
+  font-size: 30px;
+  padding: 10px 30px 10px 30px;
+  color: #03060f; 
+  cursor: pointer;
+}
+
+#colls{
+  height: 130px;
+}
+
+.column-email {
+  margin-top: 30px;
+  float: left;
+  width: 70%;
+  display: grid;
+}
+.column-name {
+  margin-top: 30px;
+  float: left;
+  width: 30%;
+  display: grid;
+}
+
+#lab-email{
+  margin-right: auto;
+  padding-left: 10px;
+}
+
+#userEmail{
+  color: #9295cd ;
+  margin-left: 10px;
+}
+
+#userName{
+  color: #9295cd ;
+}
+
+#lab-name{
+  margin-right: auto;
+}
+
+
+.checkbox {
+  margin-top: 5px;
+  margin-bottom: 40px;
+  float: left;
+  height: 40px;
+  width: 40px;
+  appearance: none;
+  border: 2px solid #9295cd;
+  outline: none;
+  transition-duration: 0.3s;
+  background: no-repeat;
+  cursor: pointer;
+}
+
+#check {
+
+    background: rgba(40,40,40,0.2);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-left: 6px;
+    padding-top: 0px;
+
+}
+
+#check:checked:after{
+  content: "\2713";
+  color: #9295cd;
+  font-size: 30px;
+  margin-top: 0px;
+  
+}
+
+
+#lore{
+  text-align: justify;
+  font-weight: 300;
+  padding-left: 30px;
+  padding-right: 20px;
+}
+
+
+  </style>
+
+<script>
+
+function setCookie(username,namevalue,usermail,mailvalue)
+{
+  document.cookie = username+"="+namevalue;
+  document.cookie = usermail+"="+mailvalue;
+}
+
+function getCookie(cname)
+{
+var name = cname + "=";
+var ca = document.cookie.split(';');
+for(var i=0; i<ca.length; i++) 
+  {
+  var c = ca[i].trim();
+  if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+  }
+return "";
+}
+
+function test()
+{
+  var userName = document.getElementById("userName").value;
+
+  var userEmail = document.getElementById("userEmail").value;
+
+
+
+  if (document.getElementById("check").checked == false)
+    {
+      document.getElementById("checkbo").style.color = "#aa53c3" 
+      document.getElementById("lore").style.color = "#aa53c3"
+      document.getElementById("check").style.border = "2px solid #aa53c3";
+
+    }
+
+  if(userEmail == "")
+  {
+    document.getElementById("userEmail").style.color = "#aa53c3";
+    document.getElementById("lab-email").style.color = "#aa53c3";
+    document.getElementById("userEmail").style.background = "linear-gradient(#aa53c3,#aa53c3) left bottom 5px /calc(95% - 10px) 2px no-repeat";
+  }
+
+  if (userName == "")
+  {
+    document.getElementById("userName").style.color = "#aa53c3";
+    document.getElementById("lab-name").style.color = "#aa53c3";
+    document.getElementById("userName").style.background = "linear-gradient(#aa53c3,#aa53c3) left bottom 5px /calc(95% - 10px) 2px no-repeat";
+  }
+
+  if (userName != "" && userEmail != "" && document.getElementById("check").checked == true)
+  {
+    setCookie("username",userName,"usermail",userEmail);
+    
+    var nowe = "<div id=\"div-3\" style=\"margin: auto;\" ><p>Dziękujemy za pobranie formularza:</p> <p style=\"color: #4f4484; font-weight: 600;\"> "+userName+" </p> Potwierdź że Twój email to: <p style=\"color: #4f4484; font-weight: 600;\"> "+userEmail+" </p> klikając poniższy link <br> <br><button onclick=\"location.href='https://www.salesmanago.pl'\" type=\"button\"> POTWIERDŹ</button> <\div>";
+    document.getElementById("div-2").innerHTML = nowe;
+    document.getElementById("div-2").style.display = "grid";
+
+  }
+
+}
+
+</script>
+
+
+</head>
+
+<body>
+  <div id="div-1">
+
+    <div id="div-2">
+        <div>
+          <h2>WITAJ!</h2>
+          WYPEŁNIJ FORMULARZ I ZGARNIJ
+          <p style="color: #4f4484; font-weight: 600;"> KUPON RABATOWY </p>
+          <p> DO WYKORZYSTANIA PRZY <br> NAJBLIŻSZYCH ZAKUPACH </p>
+
+            <div id="colls" class="row">
+            <div class="column">
+              <div class="column-email">
+                <label id="lab-email" class="email-1" for="email">EMAIL: </label>
+                <input class="email-1" id="userEmail" type="email" tabindex="2" required>
+              </div>
+            </div>
+            <div class="column">
+              <div class="column-name">
+                <label id="lab-name" class="name-1" for="name">IMIĘ: </label>
+                <input class="name-1" id="userName" type="email" tabindex="2" required>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div> 
+          <div>
+            <label id="checkbo" for="checkbox" title="Zgoda jest obowiązkowa">
+            <input id="check" class="checkbox" type="checkbox" title="Zgoda jest obowiązkowa">
+          </div>
+
+          <div id="lore" > <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </span></div></label>
+        </div>
+        
+        <br>
+        <button onclick="test()"> WYŚLIJ </button>
+
+    </div>
+  </div>
+
+</body>
+
+</html>
