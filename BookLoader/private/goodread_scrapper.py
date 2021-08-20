@@ -1,7 +1,7 @@
 ''' Goodread Scrapper '''
 import requests
 from bs4 import BeautifulSoup
-from googlesearch import search
+# from googlesearch import search
 
 
 def goodread_search(item):
