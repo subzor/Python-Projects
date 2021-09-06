@@ -14,9 +14,10 @@ Path(os.path.join(current_dir, "logs")).mkdir(parents=True, exist_ok=True)
 logging_path = os.path.join(current_dir, "logs", "sql.log")
 logging.basicConfig(filename=logging_path, level=logging.WARNING,
                     format='%(asctime)s %(levelname)s %(name)s %(message)s')
-logger=logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
-class MySQL: # pylint: disable=too-few-public-methods
+
+class MySQL:  # pylint: disable=too-few-public-methods
     '''Woo class'''
 
     def __init__(self, isbn):
@@ -33,14 +34,14 @@ class MySQL: # pylint: disable=too-few-public-methods
     def db_mysql(self):
         '''MySQL function'''
 
-        query  = ("SELECT * FROM `wp_postmeta` WHERE meta_key = '_sku' AND meta_value = {}").format(self.isbn) # pylint: disable=line-too-long
+        query = ("SELECT * FROM `wp_postmeta` WHERE meta_key = '_sku' AND meta_value = {}").format(self.isbn) # pylint: disable=line-too-long
 
         try:
             cnx = mysql.connector.connect(
-                host = self.host,
-                user = self.user,
-                password = self.password,
-                database = self.database)
+                host= self.host,
+                user= self.user,
+                password= self.password,
+                database= self.database)
 
             cursor = cnx.cursor()
 

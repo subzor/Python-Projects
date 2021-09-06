@@ -14,6 +14,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
 
+
+
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1040, 730)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -838,6 +840,7 @@ class Ui_MainWindow(object):
         self.isbn_line.setFocus()
         
         # self.load_button2.setText(_translate("MainWindow", "Pobierz ponownie"))
+
 
 if __name__ == "__main__":
     import sys

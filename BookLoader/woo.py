@@ -145,49 +145,49 @@ class WooCommerce: # pylint: disable=too-few-public-methods
                     "tags": [],
                     "attributes": [
                         {
-                        "id": 1,
+                        "id": 7,
                         "name": "Tytuł",  # cspell: disable-line
-                        "position": 1,
+                        "position": 0,
                         "visible": True,
                         "variation": True,
                         "options": [self.book["title"]]
                         },
                         {
-                        "id": 2,
+                        "id": 8,
                         "name": "Autor",  # cspell: disable-line
-                        "position": 2,
+                        "position": 0,
                         "visible": True,
                         "variation": True,
                         "options": [self.book["authors"]]
                         },
                         {
-                        "id": 3,
+                        "id": 9,
                         "name": "Wydawnictwo",  # cspell: disable-line
-                        "position": 3,
+                        "position": 0,
                         "visible": True,
                         "variation": True,
                         "options": [self.book["publisher"]]
                         },
                         {
-                        "id": 4,
+                        "id": 10,
                         "name": "Rok wydania",  # cspell: disable-line
-                        "position": 4,
+                        "position": 0,
                         "visible": True,
                         "variation": True,
                         "options": [self.book["publish_date"]]
                         },
                         {
-                        "id": 5,
+                        "id": 11,
                         "name": "Okładka",  # cspell: disable-line
-                        "position": 5,
+                        "position": 0,
                         "visible": True,
                         "variation": True,
                         "options": [self.book["binding"]]
                         },
                         {
-                        "id": 6,
+                        "id": 12,
                         "name": "ISBN",
-                        "position": 6,
+                        "position": 0,
                         "visible": True,
                         "variation": True,
                         "options": [self.book["isbn"]]
@@ -328,49 +328,49 @@ class WooCommerce: # pylint: disable=too-few-public-methods
                 "tags": [],
                 "attributes": [
                     {
-                    "id": 1,
+                    "id": 7,
                     "name": "Tytuł",  # cspell: disable-line
-                    "position": 1,
+                    "position": 0,
                     "visible": True,
                     "variation": True,
                     "options": [self.book["title"]]
                     },
                     {
-                    "id": 2,
+                    "id": 8,
                     "name": "Autor",  # cspell: disable-line
-                    "position": 2,
+                    "position": 0,
                     "visible": True,
                     "variation": True,
                     "options": [self.book["authors"]]
                     },
                     {
-                    "id": 3,
+                    "id": 9,
                     "name": "Wydawnictwo",  # cspell: disable-line
-                    "position": 3,
+                    "position": 0,
                     "visible": True,
                     "variation": True,
                     "options": [self.book["publisher"]]
                     },
                     {
-                    "id": 4,
+                    "id": 10,
                     "name": "Rok wydania",  # cspell: disable-line
-                    "position": 4,
+                    "position": 0,
                     "visible": True,
                     "variation": True,
                     "options": [self.book["publish_date"]]
                     },
                     {
-                    "id": 5,
+                    "id": 11,
                     "name": "Okładka",  # cspell: disable-line
-                    "position": 5,
+                    "position": 0,
                     "visible": True,
                     "variation": True,
                     "options": [self.book["binding"]]
                     },
                     {
-                    "id": 6,
+                    "id": 12,
                     "name": "ISBN",
-                    "position": 6,
+                    "position": 0,
                     "visible": True,
                     "variation": True,
                     "options": [self.book["isbn"]]
@@ -477,6 +477,7 @@ class WooCommerce: # pylint: disable=too-few-public-methods
 
         except Exception as error:  # pylint: disable=broad-except
             logger.info(error)
+            print("woo_post",error)
         return output
 
     def validate_category(self):

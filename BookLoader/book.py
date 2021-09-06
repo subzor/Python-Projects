@@ -151,7 +151,8 @@ class Books: # pylint: disable=too-few-public-methods, too-many-instance-attribu
             # Description :
             if self.gui["description_box"]:
                 try:
-                    self.description_list.append({"amazon" : amazon_book_get["description"]})
+                    self.description_list += amazon_book_get['description']
+                    # self.description_list.append({"amazon" : amazon_book_get["description"]})
                 except Exception as error: # pylint: disable=broad-except
                     logger.info(error)
 
@@ -216,7 +217,8 @@ class Books: # pylint: disable=too-few-public-methods, too-many-instance-attribu
             # Description :
             if self.gui["description_box"]:
                 try:
-                    self.description_list.append({"goodreads" : goodreads_book_get["description"]})
+                    self.description_list.append(goodreads_book_get["description"])
+                    # self.description_list.append({"goodreads" : goodreads_book_get["description"]})
                 except Exception as error: # pylint: disable=broad-except
                     logger.info(error)
 
@@ -281,7 +283,8 @@ class Books: # pylint: disable=too-few-public-methods, too-many-instance-attribu
             # Description :
             if self.gui["description_box"]:
                 try:
-                    self.description_list.append({"google" : google_book_get.json()["items"][0]["volumeInfo"]["description"]}) # pylint: disable=line-too-long
+                    self.description_list.append(google_book_get.json()["items"][0]["volumeInfo"]["description"])
+                    # self.description_list.append({"google" : google_book_get.json()["items"][0]["volumeInfo"]["description"]}) # pylint: disable=line-too-long
                 except Exception as error: # pylint: disable=broad-except
                     logger.info(error)
 
@@ -345,7 +348,7 @@ class Books: # pylint: disable=too-few-public-methods, too-many-instance-attribu
             authors = validator(self.authors_list) # pylint: disable=unused-variable
             binding = validator(self.binding_list) # pylint: disable=unused-variable
             publisher = validator(self.publisher_list) # pylint: disable=unused-variable
-            description = validator(self.description_list) # pylint: disable=unused-variable
+            # description = validator(self.description_list) # pylint: disable=unused-variable
             publish_date = validator(self.publish_date_list) # pylint: disable=unused-variable
 
             # Variables without validation :
@@ -469,21 +472,28 @@ def validator(validation_list): # pylint: disable=too-many-branches, too-many-re
     priority = config.get("Validator", "priority")
     source_list = [list(source.values())[0] for source in validation_list]
 
+    # Remove empty entry from main dictionary
     try:
-        # Remove empty entry from main dictionary
         loop = validation_list.copy()
         for source in loop:
             for discard in discard_list:
                 if list(source.values())[0] is discard:
                     validation_list.remove(source)
 
+        for source in validation_list:
+            source[list(source.keys())[0]] = re.sub('\s+', ' ', list(source.values())[0]) # pylint: disable=anomalous-backslash-in-string
+
     except Exception as error: # pylint: disable=broad-except
         logger.info(error)
 
+    # Remove empty entry from list
     try:
-         # Remove empty entry from list
         for discard in discard_list:
             while discard in source_list: source_list.remove(discard) # pylint: disable=multiple-statements
+
+        source_list = list(map(lambda source: re.sub('\s+', ' ', source),source_list)) # pylint: disable=anomalous-backslash-in-string
+
+
         if len(source_list) > 1:
             # Testing equality of values
             if all(source == source_list[0] for source in source_list):
