@@ -1,11 +1,12 @@
 '''amazon'''
+
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 import re
 from threading import Thread
 import requests
 from bs4 import BeautifulSoup
 import time
-
-from amazon_selenium import Amazon
 
 
 class AmazonScrapper:
@@ -24,11 +25,34 @@ class AmazonScrapper:
         self.url_list = []
         self.amazon_dict = {}
         self.time_start = time.time()
-        self.amazon_co_uk = Amazon(self.item)
-        self.url_co = []
+
+
+        self.options = Options()
+        #Hide Browser
+        # self.options.add_argument("--headless")
+        self.options.add_argument("--width=1500")
+        self.options.add_argument("--height=900")
+
+        self.options.add_argument('--log-level=1')
+        self.driver = webdriver.Chrome(executable_path=r"C:\\Temp\\chromedriver.exe", 
+                                                options=self.options)
+
+        self.driver.get(f"https://www.amazon.co.uk/s?k={self.item}&ref=nb_sb_noss")
+
+        time.sleep(2)
+        self.driver_cookies = self.driver.get_cookies()
+
+        print(self.driver_cookies)
+
+
+        self.coo = {coo['name']:coo['value'] for coo in self.driver_cookies}
+
+        print("\n", self.coo, "\n")
 
         self.get_url_list()
         self.unpack_url_list()
+
+
 
     def get_url_list(self):
         ''' Find urls in threads '''
@@ -48,34 +72,31 @@ class AmazonScrapper:
 
 
     def get_co_uk_list(self):
-        
-        self.url_co_uk = self.amazon_co_uk.get_link()
-
-        
-        # ''' Find urls from amazon.co.uk '''
-        # headers = {
-        # "User-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36 Edg/89.0.774.77",
-        # "action": "sign-in"
-        # }
-        # try:
-        #     url = 'https://www.amazon.co.uk/s?k={}&ref=nb_sb_noss'.format(self.item)
-        #     requests_session = requests.Session()
-        #     page = requests_session.get(url, headers=headers)
-        #     soup = BeautifulSoup(page.content, 'lxml',from_encoding=page.encoding)
-        #     span_list = soup.find("div",attrs={"class": "s-main-slot s-result-list s-search-results sg-row"})
-        #     span_list = span_list.findAll("div",attrs={"class": "a-section a-spacing-medium"})
-
-        #     for index, span in enumerate(span_list):
-        #         if index == 3:
-        #             break
-        #         links = span.findAll("a",attrs={"class":"a-link-normal"})
-        #         for link in links:
-        #             if self.item in link.attrs['href'] and ("Hardcover" in link.get_text() or "Paperback" in link.get_text()):
-        #                 self.url_list.append("https://www.amazon.co.uk{}".format(link.attrs['href']))
-
-        # except Exception as error:
-        #     print(error)
-        #     pass
+        ''' Find urls from amazon.co.uk '''
+        headers = {
+        "User-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36 Edg/89.0.774.77",
+        "action": "sign-in"
+        }
+        try:
+            url = 'https://www.amazon.co.uk/s?k={}&ref=nb_sb_noss'.format(self.item)
+            requests_session = requests.Session()
+            requests_session.headers = headers
+            page = requests_session.get(url, headers=headers, cookies=self.coo)
+            soup = BeautifulSoup(page.content, 'lxml',from_encoding=page.encoding)
+            span_list = soup.find("div",attrs={"class": "s-main-slot s-result-list s-search-results sg-row"})
+            span_list = span_list.findAll("div",attrs={"class": "a-section a-spacing-medium"})
+            
+            for index, span in enumerate(span_list):
+                if index == 3:
+                    break
+                links = span.findAll("a",attrs={"class":"a-link-normal"})
+                for link in links:
+                    if self.item in link.attrs['href'] and ("Hardcover" in link.get_text() or "Paperback" in link.get_text()):
+                        self.url_list.append("https://www.amazon.co.uk{}".format(link.attrs['href']))
+            print(links, "Amazon.co.uk \n")
+        except Exception as error:
+            print(error)
+            pass
 
     def get_com_list(self):
         ''' Find urls from amazon.com '''
@@ -98,12 +119,12 @@ class AmazonScrapper:
                 for link in links:
                     if self.item in link.attrs['href'] and ("Hardcover" in link.get_text() or "Paperback" in link.get_text()):
                         self.url_list.append("https://www.amazon.com{}".format(link.attrs['href']))
-
+            print(links, "Amazon.com \n")
         except Exception as error:
             print(error)
             pass
 
-    def get_product(self, amazon_url):
+    def get_product(self,amazon_url):
         ''' Parse and scrapp page '''
         headers = {
         "User-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36 Edg/89.0.774.77",
@@ -251,15 +272,6 @@ class AmazonScrapper:
 
     def unpack_url_list(self):
         ''' Thread for url list '''
-    
-        self.url_co_uk = list(set(self.url_co_uk))
-    
-        for url in self.url_co_uk:
-            if f'keywords={self.item}' in url:
-                self.url_co.append(url)
-        
-        self.url_list += self.url_co
-
         thread_list = []
         for url in self.url_list:
             worker = Thread(target=self.get_product,args=(url,))
@@ -301,4 +313,6 @@ def main(isbn):
     return amazon_dictionary
 
 
-s = main('9780380792429')
+s = main("9780380792429")
+
+print(s)
