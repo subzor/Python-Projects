@@ -51,6 +51,7 @@ class AmazonScrapper:
         try:
             url = 'https://www.amazon.co.uk/s?k={}&ref=nb_sb_noss'.format(self.item)
             requests_session = requests.Session()
+            requests_session.headers = headers
             page = requests_session.get(url, headers=headers)
             soup = BeautifulSoup(page.content, 'lxml',from_encoding=page.encoding)
             span_list = soup.find("div",attrs={"class": "s-main-slot s-result-list s-search-results sg-row"})
@@ -77,6 +78,7 @@ class AmazonScrapper:
         try:
             url = 'https://www.amazon.com/s?k={}&ref=nb_sb_noss'.format(self.item)
             requests_session = requests.Session()
+            requests_session.headers = headers
             page = requests_session.get(url, headers=headers)
             soup = BeautifulSoup(page.content, 'lxml',from_encoding=page.encoding)
             span_list = soup.find("div",attrs={"class": "s-main-slot s-result-list s-search-results sg-row"})
@@ -127,7 +129,7 @@ class AmazonScrapper:
         try:
             isbn = isbn.replace('\n','').replace("-",'')
             isbn = isbn.split(':')[1]
-            isbn = isbn.replace('\u200e','')
+            isbn = isbn.encode("ascii", "ignore").decode("utf-8")
         except Exception: # pylint: disable=broad-except
             pass
 
@@ -222,7 +224,7 @@ class AmazonScrapper:
         try:
             publisher = pub_info.split(":")[1]
             publisher = publisher.split(";")[0].replace("\n","").split("(")[0]
-            publisher = publisher.split("\u200e",'')
+            publisher = publisher.encode("ascii", "ignore").decode("utf-8")
             self.publisher_list.append(publisher)
         except Exception: # pylint: disable=broad-except
             publisher = None
@@ -236,6 +238,7 @@ class AmazonScrapper:
 
         try:
             binding = bind.split(":")[0].replace("\n","")
+            binding = binding.encode("ascii", "ignore").decode("utf-8")
             self.bind_list.append(binding)
         except Exception: # pylint: disable=broad-except
             binding = None
